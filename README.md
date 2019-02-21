@@ -1,2 +1,0 @@
-# androidProj
-Final Project

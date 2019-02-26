@@ -1,5 +1,6 @@
 package com.example.fitnessapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,7 +16,13 @@ public class Profile extends AppCompatActivity {
 
     private TextView mTextMessage;
 
-    //public abstract SharedPreferences.Editor putString(name) s ;
+    public static final String PersonalInfo = "personalInfo";
+    public static final String Name = "nameKey";
+    public static final String DateOfBirth = "birthdateKey";
+    public static final String Height = "heightKey";
+    public static final String Weight = "weightKey";
+
+    SharedPreferences sharedpreferences;
 
     public String name;
     public int age;
@@ -74,6 +81,17 @@ public class Profile extends AppCompatActivity {
         TextView weightDisplay = findViewById(R.id.weight);
         weightDisplay.setText(Double.toString(weight));*/
 
+        sharedpreferences = getSharedPreferences(PersonalInfo, Context.MODE_PRIVATE);
+
+        TextView nameDisplay = findViewById(R.id.name);
+        nameDisplay.setText(sharedpreferences.getString(Name, null));
+        TextView ageDisplay = findViewById(R.id.age);
+        ageDisplay.setText(Integer.toString(sharedpreferences.getInt(DateOfBirth, 0)));
+        TextView heightDisplay = findViewById(R.id.height);
+        heightDisplay.setText(sharedpreferences.getString(Height, null));
+        TextView weightDisplay = findViewById(R.id.weight);
+        weightDisplay.setText(sharedpreferences.getString(Weight, null));
+
 
         mTextMessage = findViewById(R.id.message);
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -85,10 +103,10 @@ public class Profile extends AppCompatActivity {
             //Sends Intent to ProfileEdit Activity
             public void onClick(View view) {
                 Intent intent = new Intent(Profile.this, ProfileEdit.class);
-                intent.putExtra("name", name);
+                /*intent.putExtra("name", name);
                 intent.putExtra("age", age);
                 intent.putExtra("height", height);
-                intent.putExtra("weight", weight);
+                intent.putExtra("weight", weight);*/
                 startActivityForResult(intent, 1 );
             }
             });
@@ -107,18 +125,15 @@ public class Profile extends AppCompatActivity {
                 if(resultCode == RESULT_OK)
                 {
 
-                    name = dataIntent.getStringExtra("name");
-                    age = dataIntent.getIntExtra("age", age);
-                    height = dataIntent.getDoubleExtra("height", height);
-                    weight = dataIntent.getDoubleExtra("weight", weight);
                     TextView nameDisplay = findViewById(R.id.name);
-                    nameDisplay.setText(this.name);
+                    nameDisplay.setText(sharedpreferences.getString(Name, null));
                     TextView ageDisplay = findViewById(R.id.age);
-                    ageDisplay.setText(Integer.toString(this.age));
+                    ageDisplay.setText(Integer.toString(sharedpreferences.getInt(DateOfBirth, 0)));
                     TextView heightDisplay = findViewById(R.id.height);
-                    heightDisplay.setText(Double.toString(this.height));
+                    heightDisplay.setText(sharedpreferences.getString(Height, null));
                     TextView weightDisplay = findViewById(R.id.weight);
-                    weightDisplay.setText(Double.toString(this.weight));
+                    weightDisplay.setText(sharedpreferences.getString(Weight, null));
+
                 }
 
         }

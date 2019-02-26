@@ -1,5 +1,6 @@
 package com.example.fitnessapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,10 +8,23 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.content.SharedPreferences;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+
+    public static final String PersonalInfo = "personalInfo";
+    public static final String Name = "nameKey";
+    public static final String DateOfBirth = "birthdateKey";
+    public static final String Height = "heightKey";
+    public static final String Weight = "weightKey";
+    public static final String FirstTimeApp = "firstOpen";
+
+    SharedPreferences sharedpreferences;
+
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        sharedpreferences = getSharedPreferences(PersonalInfo, Context.MODE_PRIVATE);
+
+        Boolean firstOpen = sharedpreferences.getBoolean(FirstTimeApp, true);
+        if (firstOpen){
+            Intent intent = new Intent(MainActivity.this, FirstOpen.class);
+            startActivity(intent);
+            Toast.makeText(MainActivity.this, "First Run", Toast.LENGTH_LONG).show();
+        }
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -52,5 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
 }

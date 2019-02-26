@@ -1,62 +1,31 @@
 package com.example.fitnessapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.content.Context;
 
-public class ProfileEdit extends AppCompatActivity {
+public class FirstOpen extends AppCompatActivity {
 
-    private TextView mTextMessage;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_videos:
-                    break;
-
-                case R.id.navigation_home:
-                    break;
-
-                case R.id.navigation_calendar:
-                    break;
-
-                case R.id.navigation_profile:
-                    Intent intent = new Intent(ProfileEdit.this, Profile.class);
-                    startActivity(intent);
-                    break;
-            }
-            return false;
-        }
-    };
-
+    // Creates calls keys for necessary Sharedpreferences calls
     public static final String PersonalInfo = "personalInfo";
     public static final String Name = "nameKey";
     public static final String DateOfBirth = "birthdateKey";
     public static final String Height = "heightKey";
     public static final String Weight = "weightKey";
+    public static final String FirstTimeApp = "firstOpen";
 
     SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_edit);
+        setContentView(R.layout.activity_first_open);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         sharedpreferences = getSharedPreferences("personalInfo", Context.MODE_PRIVATE);
 
@@ -67,38 +36,30 @@ public class ProfileEdit extends AppCompatActivity {
         EditText heightfield = findViewById(R.id.editHeight);
         EditText weightfield = findViewById(R.id.editWeight);
 
-        //Gets PersonalInfo on Profile
-        Intent intent = getIntent();
-        namefield.setText(sharedpreferences.getString(Name, null));
-        agefield.setText(Integer.toString(sharedpreferences.getInt(DateOfBirth, 0)));
-        heightfield.setText(sharedpreferences.getString(Height, null));
-        weightfield.setText(sharedpreferences.getString(Weight, null));
 
 
-        //Saves Edited ProfileInfo to SharedPreferences and returns Back to Profile
+        //Saves Edited ProfileInfo to SharedPreferences and returns Back to HomeScreen
         Button saveButton = findViewById(R.id.button_save);
         saveButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
-                //Gets location of EditText Fields
                 EditText namefield = (EditText)findViewById(R.id.editName);
                 EditText agefield = (EditText)findViewById(R.id.editAge);
                 EditText heightfield = (EditText)findViewById(R.id.editHeight);
                 EditText weightfield = (EditText)findViewById(R.id.editWeight);
 
-                //Gets Values of EditText Fields
                 String name = namefield.getText().toString();
                 int age = Integer.parseInt(agefield.getText().toString());
                 String height = (heightfield.getText().toString());
                 String weight = (weightfield.getText().toString());
 
-                //Sets SharedPreference values for personal info to new values
                 SharedPreferences.Editor editor = sharedpreferences.edit();
 
                 editor.putString(Name, name);
                 editor.putInt(DateOfBirth, age);
                 editor.putString(Height, height);
                 editor.putString(Weight, weight);
+                editor.putBoolean(FirstTimeApp, false);
                 editor.commit();
 
 
@@ -108,6 +69,4 @@ public class ProfileEdit extends AppCompatActivity {
             }
         });
     }
-
-
 }

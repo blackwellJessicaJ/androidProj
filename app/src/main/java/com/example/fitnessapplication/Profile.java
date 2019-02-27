@@ -43,14 +43,21 @@ public class Profile extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_videos:
+                    Intent intentWorkouts = new Intent(Profile.this, Workouts.class);
+                    startActivity(intentWorkouts);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     break;
 
                 case R.id.navigation_home:
-                    Intent intent = new Intent(Profile.this, MainActivity.class);
-                    startActivity(intent);
+                    Intent intentHome = new Intent(Profile.this, MainActivity.class);
+                    startActivity(intentHome);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     break;
 
                 case R.id.navigation_calendar:
+                    Intent intentCalendar = new Intent(Profile.this, Calendar.class);
+                    startActivity(intentCalendar);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     break;
 
                 case R.id.navigation_profile:
@@ -94,8 +101,9 @@ public class Profile extends AppCompatActivity {
 
 
         mTextMessage = findViewById(R.id.message);
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        BottomNavigationView bottomNavigation = findViewById(R.id.navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        bottomNavigation.getMenu().getItem(3).setChecked(true);
 
         Button editButton = findViewById(R.id.edit_button);
         editButton.setOnClickListener(new View.OnClickListener() {

@@ -17,29 +17,7 @@ public class ProfileEdit extends AppCompatActivity {
 
     private TextView mTextMessage;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_videos:
-                    break;
-
-                case R.id.navigation_home:
-                    break;
-
-                case R.id.navigation_calendar:
-                    break;
-
-                case R.id.navigation_profile:
-                    Intent intent = new Intent(ProfileEdit.this, Profile.class);
-                    startActivity(intent);
-                    break;
-            }
-            return false;
-        }
-    };
 
     public static final String PersonalInfo = "personalInfo";
     public static final String Name = "nameKey";
@@ -55,8 +33,7 @@ public class ProfileEdit extends AppCompatActivity {
         setContentView(R.layout.activity_profile_edit);
 
         mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
 
         sharedpreferences = getSharedPreferences("personalInfo", Context.MODE_PRIVATE);
 
@@ -104,6 +81,15 @@ public class ProfileEdit extends AppCompatActivity {
 
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+
+        Button cancelButton = findViewById(R.id.button_cancel);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent intent = new Intent();
                 finish();
             }
         });

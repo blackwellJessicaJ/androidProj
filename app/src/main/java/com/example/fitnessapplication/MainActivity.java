@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
 
                 case R.id.navigation_videos:
+                    Intent intentWorkouts = new Intent(MainActivity.this, Workouts.class);
+                    startActivity(intentWorkouts);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     break;
 
 
@@ -41,11 +44,15 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.navigation_calendar:
+                    Intent intentCalendar = new Intent(MainActivity.this, Calendar.class);
+                    startActivity(intentCalendar);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     break;
 
                 case R.id.navigation_profile:
-                    Intent intent = new Intent(MainActivity.this, Profile.class);
-                    startActivity(intent);
+                    Intent intentProfile = new Intent(MainActivity.this, Profile.class);
+                    startActivity(intentProfile);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     break;
             }
 
@@ -70,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        bottomNavigation.setSelectedItemId(R.id.navigation_home);
+        bottomNavigation.getMenu().getItem(1).setChecked(true);
 
 
     }

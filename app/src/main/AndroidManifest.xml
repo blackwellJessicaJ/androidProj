@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FirstOpen"></activity>
+        <activity
+            android:name=".Calendar"
+            android:label="@string/title_activity_calendar"></activity>
+        <activity
+            android:name=".Workouts"
+            android:label="@string/title_activity_workouts" />
+        <activity android:name=".FirstOpen" />
         <activity
             android:name=".ProfileEdit"
             android:label="@string/title_activity_profile_edit" />

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.navigation_calendar:
-                    Intent intentCalendar = new Intent(MainActivity.this, Calendar.class);
+                    Intent intentCalendar = new Intent(MainActivity.this, CalendarPage.class);
                     startActivity(intentCalendar);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     break;

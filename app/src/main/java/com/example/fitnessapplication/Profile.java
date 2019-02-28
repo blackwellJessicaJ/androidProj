@@ -55,7 +55,7 @@ public class Profile extends AppCompatActivity {
                     break;
 
                 case R.id.navigation_calendar:
-                    Intent intentCalendar = new Intent(Profile.this, Calendar.class);
+                    Intent intentCalendar = new Intent(Profile.this, CalendarPage.class);
                     startActivity(intentCalendar);
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     break;

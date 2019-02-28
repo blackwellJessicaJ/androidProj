@@ -30,7 +30,7 @@ public class Workouts extends AppCompatActivity {
                     break;
 
                 case R.id.navigation_calendar:
-                    Intent intentCalendar = new Intent(Workouts.this, Calendar.class);
+                    Intent intentCalendar = new Intent(Workouts.this, CalendarPage.class);
                     startActivity(intentCalendar);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     break;

@@ -1,27 +1,49 @@
 package com.example.fitnessapplication;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.CalendarView;
 import android.widget.TextView;
+import com.applandeo.materialcalendarview.*;
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import java.io.Serializable;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
-
+import java.util.List;
 
 
 public class CalendarPage extends AppCompatActivity {
 
-    private TextView mTextMessage;
 
-        CalendarView calendarView;
+
+    Calendar day = Calendar.getInstance();
+
+
+    private CalendarView mCalendarView;
+
+
+
+
+
+
+    private List<EventDay> mEventDays = new ArrayList<>();
+    public static final String EVENT ="event";
+    public static final String RESULT = "result";
+    private static final int ADD_NOTE = 44;
+    public static final String ADD = "ADD";
+
+
+
 
         private static final String TAG = CalendarPage.class.getSimpleName();
 
@@ -59,28 +81,110 @@ public class CalendarPage extends AppCompatActivity {
             }
         };
 
+
+
+
+
         @Override
         protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
+
+
+
             setContentView(R.layout.activity_calendar);
 
-            mTextMessage = (TextView) findViewById(R.id.message);
+
             BottomNavigationView bottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
             bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
             bottomNavigation.getMenu().getItem(2).setChecked(true);
 
-            calendarView = findViewById(R.id.calendarView);
 
-            calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+
+
+            mCalendarView =  (CalendarView) findViewById(R.id.calendarView);
+
+            mCalendarView.setOnDayClickListener(new OnDayClickListener() {
                 @Override
-                public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
-
+                public void onDayClick(EventDay eventDay) {
+                    previewNote(eventDay);
                 }
             });
 
-            //CalendarCustomView mView = (CalendarCustomView)findViewById(R.id.custom_calendar);
+
+
+            Intent workout = getIntent();
+
+            if (workout.getStringExtra("ADD") != null ){
+                Object event = workout.getParcelableExtra("event");
+                MyEventDay myEventDay = (MyEventDay) event;
+
+
+                /*MyEventDay myEventDay = workout.getParcelableExtra("event");
+                try {
+                    mCalendarView.setDate(day);
+                } catch (OutOfDateRangeException e) {
+                    e.printStackTrace();
+                }
+                mEventDays.add(myEventDay);
+                mCalendarView.setEvents(mEventDays);*/
+                Intent addNote = new Intent(CalendarPage.this, AddNote.class);
+                //Bundle bundle = new Bundle();
+                //bundle.putParcelable("event", myEventDay);
+                addNote.putExtra("event", myEventDay);
+
+                startActivityForResult(addNote, 1);
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            mCalendarView =  (CalendarView) findViewById(R.id.calendarView);
+            MyEventDay completedWorkout = data.getParcelableExtra(RESULT);
+
+            mCalendarView.setDate(day);
+            mEventDays.add(completedWorkout);
+            mCalendarView.setEvents(mEventDays);
+
+            /*SharedPreferences prefs = getSharedPreferences("CompletedWorkouts", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+
+            try{
+                editor.putString("CompletedWorkouts", ObjectSerializer.serialize(mEventDays));
+
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
+            editor.commit();*/
+        }
+    }
+
+
+    private void previewNote(EventDay eventDay) {
+        Intent intent = new Intent(CalendarPage.this, NotePreview.class);
+        if(eventDay instanceof MyEventDay){
+            intent.putExtra(EVENT, (MyEventDay) eventDay);
+        }
+        startActivity(intent);
+    }
+
 
 }
+

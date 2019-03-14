@@ -5,12 +5,22 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Workouts extends AppCompatActivity {
 
     private TextView mTextMessage;
+    private List<Workout> workouts;
+    private RecyclerView rv;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -55,6 +65,30 @@ public class Workouts extends AppCompatActivity {
         BottomNavigationView bottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigation.getMenu().getItem(0).setChecked(true);
+
+
+        rv = (RecyclerView)findViewById(R.id.rv);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+        rv.setHasFixedSize(true);
+        initializeData();
+        initializeAdapter();
     }
 
+    private void initializeData(){
+        workouts = new ArrayList<>();
+        workouts.add(new Workout ("Push-Ups", "10 Push-Ups"));
+    }
+
+    private void initializeAdapter(){
+        RVAdapter adapter = new RVAdapter(workouts);
+        rv.setAdapter(adapter);
+    }
+
+
+
+
+
 }
+
+

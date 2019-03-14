@@ -37,4 +37,7 @@ dependencies {
     implementation 'android.arch.navigation:navigation-fragment:1.0.0-beta02'
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
     implementation 'joda-time:joda-time:2.9.4'
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+
 }

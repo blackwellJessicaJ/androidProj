@@ -1,7 +1,9 @@
 package com.example.fitnessapplication;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.applandeo.materialcalendarview.EventDay;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -24,25 +27,35 @@ public class AddNote extends AppCompatActivity {
 
         TextView note = (TextView) findViewById(R.id.note);
 
-
+        //Gets myEventDay and Displays note on Screen
         if (intent != null) {
             Object event = intent.getParcelableExtra("event");
 
             if(event instanceof MyEventDay){
-                MyEventDay myEventDay = (MyEventDay)event;
 
+
+                MyEventDay myEventDay = (MyEventDay)event;
                 getSupportActionBar().setTitle(getFormattedDate(myEventDay.getCalendar().getTime()));
                 note.setText(myEventDay.getNote());
 
                 Button button = (Button) findViewById(R.id.button);
+
+                //On Button Click, gets existing note (if any) for current date and appends the new note to it
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Intent intent = getIntent();
-                        //Object event = intent.getParcelableExtra("event");
-                        //MyEventDay myEventDay = (MyEventDay) event;
                         Intent returnIntent = new Intent();
+                        Calendar day = Calendar.getInstance();
 
+                        SharedPreferences workoutNotes = v.getContext().getSharedPreferences("WorkoutNotes", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = workoutNotes.edit();
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        String currentNote = workoutNotes.getString(sdf.format(day.getTime()), "") + "\n" + myEventDay.getNote();
+                        myEventDay.setNote(currentNote);
+                        editor.putString(sdf.format(day.getTime()), currentNote);
+                        editor.commit();
+
+                        //Returns edited Event to CalendarPage
                         returnIntent.putExtra(CalendarPage.RESULT, myEventDay);
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();

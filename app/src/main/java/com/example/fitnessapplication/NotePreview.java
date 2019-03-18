@@ -21,6 +21,7 @@ public class NotePreview extends AppCompatActivity {
 
         TextView note = (TextView) findViewById(R.id.note);
 
+        //Gets note from event and displays on Screen
         if (intent != null) {
             Object event = intent.getParcelableExtra(CalendarPage.EVENT);
 

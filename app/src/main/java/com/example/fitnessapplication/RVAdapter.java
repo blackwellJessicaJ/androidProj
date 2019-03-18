@@ -1,7 +1,9 @@
 package com.example.fitnessapplication;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -62,30 +64,26 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
         workoutViewHolder.workoutName.setText(workouts.get(i).name);
         workoutViewHolder.workoutReps.setText(workouts.get(i).reps);
 
+
         workoutViewHolder.workoutButton.setOnClickListener(new View.OnClickListener() {
+
+           //Takes Information of Selected Workout, Creates EventDay, and sends to CalendarPage
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), CalendarPage.class);
                 Bundle bundle = new Bundle();
-                //bundle.putString("workoutRep", workouts.get(i).reps);
 
-                //Date c = Calendar.getInstance().getTime();
-
-                //SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-                //String currentDate = df.format(c);
                 Calendar day = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
                 MyEventDay myEventDay = new MyEventDay(day,
-                        R.drawable.ic_message_black_48dp, workouts.get(i).reps);
+                        R.drawable.ic_message_black_48dp, sdf.format(day.getTime()) + ": " + workouts.get(i).reps);
 
-                //bundle.putString("ADD", "ADD");
-                //bundle.putParcelable("event", myEventDay)
                 intent.putExtra("ADD", "ADD");
                 intent.putExtra("event", myEventDay);
 
 
 
 
-                //intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
             }
         });

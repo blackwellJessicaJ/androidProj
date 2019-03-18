@@ -75,11 +75,18 @@ public class Workouts extends AppCompatActivity {
         initializeAdapter();
     }
 
+    //Initialize the data for the RecycleViewer CardViews
     private void initializeData(){
         workouts = new ArrayList<>();
         workouts.add(new Workout ("Push-Ups", "10 Push-Ups"));
+        workouts.add(new Workout ("Push-Ups", "20 Push-Ups"));
+        workouts.add(new Workout ("Sit-Ups", "10 Sit-Ups"));
+        workouts.add(new Workout ("Sit-Ups", "20 Sit-Ups"));
+        workouts.add(new Workout ("Pull-Ups", "10 Pull-Ups"));
+        workouts.add(new Workout ("Pull-Ups", "20 Pull-Ups"));
     }
 
+    //Sets RecyclerView
     private void initializeAdapter(){
         RVAdapter adapter = new RVAdapter(workouts);
         rv.setAdapter(adapter);

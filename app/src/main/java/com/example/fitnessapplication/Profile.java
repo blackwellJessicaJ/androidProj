@@ -77,17 +77,7 @@ public class Profile extends AppCompatActivity {
 
 
 
-
-        //Display Info as TextView
-        /*TextView nameDisplay = findViewById(R.id.name);
-        nameDisplay.setText(name);
-        TextView ageDisplay = findViewById(R.id.age);
-        ageDisplay.setText(Integer.toString(age));
-        TextView heightDisplay = findViewById(R.id.height);
-        heightDisplay.setText(Double.toString(height));
-        TextView weightDisplay = findViewById(R.id.weight);
-        weightDisplay.setText(Double.toString(weight));*/
-
+        //Gets saved UserData and sets to TextView
         sharedpreferences = getSharedPreferences(PersonalInfo, Context.MODE_PRIVATE);
 
         TextView nameDisplay = findViewById(R.id.name);
@@ -111,10 +101,6 @@ public class Profile extends AppCompatActivity {
             //Sends Intent to ProfileEdit Activity
             public void onClick(View view) {
                 Intent intent = new Intent(Profile.this, ProfileEdit.class);
-                /*intent.putExtra("name", name);
-                intent.putExtra("age", age);
-                intent.putExtra("height", height);
-                intent.putExtra("weight", weight);*/
                 startActivityForResult(intent, 1 );
             }
             });

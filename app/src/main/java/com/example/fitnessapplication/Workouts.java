@@ -5,27 +5,22 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
-import com.google.android.youtube.player.YouTubePlayerView;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Workouts extends YouTubeBaseActivity
-        implements YouTubePlayer.OnInitializedListener {
-
-
-    public static final String DEVELOPER_KEY = "AIzaSyBb4W4CpWZZXaQf-G8x02tOnSR51_b_q0k";
-    private static final String VIDEO_ID = "srH-2pQdKhg";
-    private static final int RECOVERY_DIALOG_REQUEST = 1;
-
-    YouTubePlayerFragment myYouTubePlayerFragment;
+public class Workouts extends AppCompatActivity {
 
     private TextView mTextMessage;
+    private List<Workout> workouts;
+    private RecyclerView rv;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,48 +61,41 @@ public class Workouts extends YouTubeBaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workouts);
 
-        //youtube player
-        myYouTubePlayerFragment = (YouTubePlayerFragment)getFragmentManager().findFragmentById(R.id.youtubeplayerfragment);
-        myYouTubePlayerFragment.initialize(DEVELOPER_KEY, this);
-
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView bottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigation.getMenu().getItem(0).setChecked(true);
+
+
+        rv = (RecyclerView)findViewById(R.id.rv);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+        rv.setHasFixedSize(true);
+        initializeData();
+        initializeAdapter();
     }
 
-    @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-        if(!b){
-            youTubePlayer.cueVideo(VIDEO_ID);
-        }
+    //Initialize the data for the RecycleViewer CardViews
+    private void initializeData(){
+        workouts = new ArrayList<>();
+        workouts.add(new Workout ("Push-Ups", "10 Push-Ups"));
+        workouts.add(new Workout ("Push-Ups", "20 Push-Ups"));
+        workouts.add(new Workout ("Sit-Ups", "10 Sit-Ups"));
+        workouts.add(new Workout ("Sit-Ups", "20 Sit-Ups"));
+        workouts.add(new Workout ("Pull-Ups", "10 Pull-Ups"));
+        workouts.add(new Workout ("Pull-Ups", "20 Pull-Ups"));
     }
 
-    @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider,
-                                        YouTubeInitializationResult youTubeInitializationResult) {
-
-        if (youTubeInitializationResult.isUserRecoverableError()
-        ) {
-
-            youTubeInitializationResult.getErrorDialog(this,RECOVERY_DIALOG_REQUEST).show();
-        }
-        else {
-            String errorMessage = String.format("There was an error initializing the YouTubePlayer", youTubeInitializationResult.toString());
-            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
-        }
+    //Sets RecyclerView
+    private void initializeAdapter(){
+        RVAdapter adapter = new RVAdapter(workouts);
+        rv.setAdapter(adapter);
     }
 
-    @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data){
-        if (requestCode== RECOVERY_DIALOG_REQUEST){
-            //retry initialization if user performed recovery action
-            getYouTubePlayerProvider().initialize(DEVELOPER_KEY, this);
-        }
-    }
 
-    protected YouTubePlayer.Provider getYouTubePlayerProvider(){
-        return (YouTubePlayerView) findViewById(R.id.youtubeplayerfragment);
-    }
+
+
 
 }
+
+

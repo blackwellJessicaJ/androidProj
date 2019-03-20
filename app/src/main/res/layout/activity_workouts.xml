@@ -8,30 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".Workouts">
 
-
-    //needs vertical and horizontal constraints
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.google.android.youtube.player.YouTubePlayerFragment"
-        android:id="@+id/youtubeplayerfragment"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-
-        />
-
-
-
-    <TextView
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-/>
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="0dp"
@@ -43,5 +19,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv"
+        />
+
+
 
 </android.support.constraint.ConstraintLayout>

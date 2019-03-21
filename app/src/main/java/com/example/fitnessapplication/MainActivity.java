@@ -11,6 +11,9 @@ import android.widget.TextView;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
@@ -78,6 +81,18 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigation.getMenu().getItem(1).setChecked(true);
+
+
+        TextView nameText = findViewById(R.id.Name);
+        nameText.setText(sharedpreferences.getString(Name, null));
+
+
+        Calendar day = Calendar.getInstance();
+        SharedPreferences workoutNotes = getSharedPreferences("WorkoutNotes", Context.MODE_PRIVATE);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        TextView workouts = findViewById(R.id.todaysWorkoutsList);
+        workouts.setText(workoutNotes.getString(sdf.format(day.getTime()), ""));
 
 
     }

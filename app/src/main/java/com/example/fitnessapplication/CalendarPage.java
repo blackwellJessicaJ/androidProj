@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import com.applandeo.materialcalendarview.*;
 import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -110,6 +111,7 @@ public class CalendarPage extends AppCompatActivity {
             mCalendarView =  (CalendarView) findViewById(R.id.calendarView);
 
 
+
             //Gets Workout EventDays from SharedPreferences and applies them to the Calendar View
             SharedPreferences dates = getSharedPreferences("CompletedWorkouts", Context.MODE_PRIVATE);
 
@@ -117,20 +119,27 @@ public class CalendarPage extends AppCompatActivity {
             String json = dates.getString(workoutReps,null);
 
             if (json != null) {
+                json = dates.getString(workoutReps,null);
                 Type type = new TypeToken<ArrayList<MyEventDay>>(){}.getType();
                 ArrayList<MyEventDay> eventNote= gson.fromJson(json, type);
 
-                //Uses for loop to turn each MyEventDay object into an EventDay and applies it
+                List<EventDay> mEventDays = new ArrayList<>();
+
+                //Uses for loop to turn each MyEventDay object into an EventDay and applies it after the loop
                 for(int counter = 0; counter < eventNote.size(); counter++) {
                     mCalendarView =  (CalendarView) findViewById(R.id.calendarView);
-                    List<EventDay> mEventDays = new ArrayList<>();
+
                     MyEventDay completedWorkout = eventNote.get(counter);
-                    //mCalendarView.setDate(completedWorkout.getCalendar());
+                    mCalendarView.setMinimumDate(null);
+                    mCalendarView.setMaximumDate(null);
+                    try {
+                        mCalendarView.setDate(completedWorkout.getCalendar());
+                    } catch (OutOfDateRangeException e) {
+                        e.printStackTrace();
+                    }
                     mEventDays.add(completedWorkout);
-
-                    mCalendarView.setEvents(mEventDays);
                 }
-
+                mCalendarView.setEvents(mEventDays);
 
             }
 
@@ -156,23 +165,9 @@ public class CalendarPage extends AppCompatActivity {
             }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
-        //Returns from AddNote Activity
+    //Returns from AddNote Activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == RESULT_OK) {
@@ -181,21 +176,58 @@ public class CalendarPage extends AppCompatActivity {
             mCalendarView =  (CalendarView) findViewById(R.id.calendarView);
             MyEventDay completedWorkout = data.getParcelableExtra(RESULT);
             List<EventDay> mEventDays = new ArrayList<>();
-            //mCalendarView.setDate(completedWorkout.getCalendar());
+            try {
+                mCalendarView.setDate(completedWorkout.getCalendar());
+            } catch (OutOfDateRangeException e) {
+                e.printStackTrace();
+            }
             mEventDays.add(completedWorkout);
             mCalendarView.setEvents(mEventDays);
 
             //Adds MyEventDay to an array to be added to SharedPreferences
-            List<MyEventDay> eventNotes = new ArrayList<>();
-            eventNotes.add(completedWorkout);
+            List<MyEventDay> eventsNote = new ArrayList<>();
             SharedPreferences dates = getSharedPreferences("CompletedWorkouts", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = dates.edit();
-            Gson gson = new Gson();
-            String json = gson.toJson(eventNotes);
-            editor.putString(workoutReps, json);
+            String json = dates.getString(workoutReps,null);
+            Type type = new TypeToken<ArrayList<MyEventDay>>(){}.getType();
+
+            if (json == null){
+                eventsNote = new ArrayList<>();
+            } else {
+                eventsNote = new Gson().fromJson(json, type);
+            }
+
+            //Checks if Events Already Exist in the Shared Preferences
+            if(eventsNote.size() != 0){
+
+                int lastElement = eventsNote.size()-1;
+                MyEventDay temp = eventsNote.get(lastElement);
+                //Checks if Event for Current day Exists and replaces it if it does, else just adds
+                if(temp.getCalendar().equals(completedWorkout.getCalendar())) {
+
+                    eventsNote.set(eventsNote.size()-1, completedWorkout);
+                }else {
+
+                    eventsNote.add(completedWorkout);
+                }
+            }else{
+                eventsNote.add(completedWorkout);
+            }
+
+            String newJson = new Gson().toJson(eventsNote);
+            editor.putString(workoutReps, newJson);
             editor.commit();
 
+
+
+
+
         }
+        //Refreshes Calendar
+        Intent refresh = new Intent(CalendarPage.this, CalendarPage.class);
+        startActivity(refresh);
+        this.finish();
+
     }
 
     //Starts PreviewNote Activity for selected date
@@ -206,6 +238,8 @@ public class CalendarPage extends AppCompatActivity {
         }
         startActivity(intent);
     }
+
+
 
 
 }

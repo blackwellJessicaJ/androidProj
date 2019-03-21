@@ -51,12 +51,14 @@ public class AddNote extends AppCompatActivity {
                         SharedPreferences.Editor editor = workoutNotes.edit();
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                         String currentNote = workoutNotes.getString(sdf.format(day.getTime()), "") + "\n" + myEventDay.getNote();
-                        myEventDay.setNote(currentNote);
+                        //myEventDay.setNote(currentNote);
+
                         editor.putString(sdf.format(day.getTime()), currentNote);
                         editor.commit();
 
                         //Returns edited Event to CalendarPage
-                        returnIntent.putExtra(CalendarPage.RESULT, myEventDay);
+                        MyEventDay newMyEventDay = new MyEventDay(day, R.drawable.ic_message_black_48dp, currentNote);
+                        returnIntent.putExtra(CalendarPage.RESULT, newMyEventDay);
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();
                     }

@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 public class Profile extends AppCompatActivity {
 
-    private TextView mTextMessage;
 
     public static final String PersonalInfo = "personalInfo";
     public static final String Name = "nameKey";
@@ -90,7 +89,7 @@ public class Profile extends AppCompatActivity {
         weightDisplay.setText(sharedpreferences.getString(Weight, null));
 
 
-        mTextMessage = findViewById(R.id.message);
+
         BottomNavigationView bottomNavigation = findViewById(R.id.navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigation.getMenu().getItem(3).setChecked(true);

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.content.SharedPreferences;
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         TextView workouts = findViewById(R.id.todaysWorkoutsList);
+
         workouts.setText(workoutNotes.getString(sdf.format(day.getTime()), ""));
 
 

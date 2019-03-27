@@ -7,8 +7,7 @@
     <string name="title_activity_profile_edit">ProfileEdit</string>
     <string name="title_activity_main_fragment">mainFragment</string>
     <string name="title_note_preview">Workouts Completed</string>
-
-
+    <string name="title_edit_note">Edit Note</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

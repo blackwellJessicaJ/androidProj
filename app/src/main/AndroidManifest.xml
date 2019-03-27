@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddNote"></activity>
+        <activity android:name=".EditNote"
+            android:label="@string/title_edit_note"/>
+        <activity android:name=".AddNote" />
         <activity
             android:name=".NotePreview"
             android:label="@string/title_note_preview" />
@@ -34,7 +36,7 @@
             android:label="@string/title_activity_profile" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/title_home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -82,6 +82,8 @@ public class Workouts extends AppCompatActivity {
         workouts.add(new Workout ("Sit-Ups", "20 Sit-Ups"));
         workouts.add(new Workout ("Pull-Ups", "10 Pull-Ups"));
         workouts.add(new Workout ("Pull-Ups", "20 Pull-Ups"));
+        workouts.add(new Workout ("Squats", "10 Squats" ));
+        workouts.add(new Workout ("Squats", "20 Squats" ));
     }
 
     //Sets RecyclerView

@@ -3,6 +3,8 @@ package com.example.fitnessapplication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.applandeo.materialcalendarview.EventDay;
@@ -31,7 +33,6 @@ public class NotePreview extends AppCompatActivity {
                 getSupportActionBar().setTitle(getFormattedDate(myEventDay.getCalendar().getTime()));
                 note.setText(myEventDay.getNote());
 
-                return;
             }
 
             if(event instanceof EventDay){
@@ -39,6 +40,36 @@ public class NotePreview extends AppCompatActivity {
                 getSupportActionBar().setTitle(getFormattedDate(eventDay.getCalendar().getTime()));
             }
         }
+
+        Button edit = (Button) findViewById(R.id.editButton);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //Sends Intent to NoteEdit Activity
+            public void onClick(View view) {
+                Intent editNote = new Intent(NotePreview.this, EditNote.class);
+                MyEventDay myEventDay = intent.getParcelableExtra(CalendarPage.EVENT);
+                editNote.putExtra("event", myEventDay);
+                startActivityForResult(editNote, 1 );
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, Intent editNote){
+        super.onActivityResult(requestCode, resultCode, editNote);
+
+        switch (requestCode){
+            case 1:
+                if(resultCode == RESULT_OK){
+                    TextView note = (TextView) findViewById(R.id.note);
+                    MyEventDay newNote = editNote.getParcelableExtra("New Note");
+                    note.setText(newNote.getNote());
+
+                }
+
+            }
+
     }
 
     public static String getFormattedDate(Date date) {

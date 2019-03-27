@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/cv"
+    android:padding="16dp"
     >
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:weightSum="50"
+        android:weightSum="30"
         >
 
 
@@ -20,23 +20,24 @@
             android:id="@+id/videoWebView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="30">
+            android:layout_weight="15">
 
         </WebView>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="05"
             android:id="@+id/workout_name"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:textSize="20dp"
+            android:textSize="40sp"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="05"
+            android:textSize="30sp"
             android:id="@+id/workout_reps"
             android:layout_below="@+id/workout_name"
             />

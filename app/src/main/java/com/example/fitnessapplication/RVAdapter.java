@@ -25,7 +25,7 @@ import java.util.List;//
 //merged with VideoAdapter to add videos to recyclerview
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>{
     //ex
-    List<YouTubeVideos> youtubeVideoList;
+   // List<YouTubeVideos> youtubeVideoList;
     public RVAdapter(){
 
     }
@@ -77,7 +77,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
         workoutViewHolder.workoutName.setText(workouts.get(i).name);
         workoutViewHolder.workoutReps.setText(workouts.get(i).reps);
         //ex
-        workoutViewHolder.videoWeb.loadData(youtubeVideoList.get(i).getVideoUrl(), "text/html","utf-8" );
+        workoutViewHolder.videoWeb.loadData(workouts.get(i).getVideoUrl(), "text/html","utf-8" );
 
 
         workoutViewHolder.workoutButton.setOnClickListener(new View.OnClickListener() {

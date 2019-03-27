@@ -36,4 +36,12 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
 
+    <!--<WebView
+        android:id="@+id/videoWebView"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        tools:ignore="MissingConstraints">
+
+    </WebView>-->
+
 </android.support.constraint.ConstraintLayout>

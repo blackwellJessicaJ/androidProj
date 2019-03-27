@@ -76,14 +76,30 @@ public class Workouts extends AppCompatActivity {
     //Initialize the data for the RecycleViewer CardViews
     private void initializeData(){
         workouts = new ArrayList<>();
-        workouts.add(new Workout ("Push-Ups", "10 Push-Ups"));
-        workouts.add(new Workout ("Push-Ups", "20 Push-Ups"));
-        workouts.add(new Workout ("Sit-Ups", "10 Sit-Ups"));
-        workouts.add(new Workout ("Sit-Ups", "20 Sit-Ups"));
-        workouts.add(new Workout ("Pull-Ups", "10 Pull-Ups"));
-        workouts.add(new Workout ("Pull-Ups", "20 Pull-Ups"));
-        workouts.add(new Workout ("Squats", "10 Squats" ));
-        workouts.add(new Workout ("Squats", "20 Squats" ));
+        workouts.add(new Workout ("Push-Ups", "10 Push-Ups", "<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://www.youtube.com/embed/YdB1HMCldJY\" frameborder=\"0\" " +
+                "allowfullscreen></iframe>"));
+        workouts.add(new Workout ("Push-Ups", "20 Push-Ups", "<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+                "allowfullscreen></iframe>"));
+        workouts.add(new Workout ("Sit-Ups", "10 Sit-Ups", "<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+                "allowfullscreen></iframe>"));
+        workouts.add(new Workout ("Sit-Ups", "20 Sit-Ups","<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+                "allowfullscreen></iframe>"));
+        workouts.add(new Workout ("Pull-Ups", "10 Pull-Ups","<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+                "allowfullscreen></iframe>"));
+        workouts.add(new Workout ("Pull-Ups", "20 Pull-Ups","<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+                "allowfullscreen></iframe>"));
+        workouts.add(new Workout ("Squats", "10 Squats" ,"<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+                "allowfullscreen></iframe>"));
+        workouts.add(new Workout ("Squats", "20 Squats" ,"<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+                "allowfullscreen></iframe>"));
     }
 
     //Sets RecyclerView

@@ -5,9 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.android.youtube.player.YouTubePlayer;
+
 import java.util.Vector;
 
+
+
 public class WorkoutRecycler extends AppCompatActivity {
+
 
     RecyclerView recyclerView;
     Vector<YouTubeVideos> youtubeVideos = new Vector<YouTubeVideos>();

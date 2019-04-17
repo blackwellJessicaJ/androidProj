@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -46,7 +48,7 @@ public class NotePreview extends AppCompatActivity {
             @Override
             //Sends Intent to NoteEdit Activity
             public void onClick(View view) {
-                Intent editNote = new Intent(NotePreview.this, EditNote.class);
+                Intent  editNote = new Intent(NotePreview.this, EditNote.class);
                 MyEventDay myEventDay = intent.getParcelableExtra(CalendarPage.EVENT);
                 editNote.putExtra("event", myEventDay);
                 startActivityForResult(editNote, 1 );
@@ -62,6 +64,16 @@ public class NotePreview extends AppCompatActivity {
         switch (requestCode){
             case 1:
                 if(resultCode == RESULT_OK){
+
+                    WebView videoView = findViewById(R.id.videoWebView);
+                    MyEventDay newVideo = editNote.getParcelableExtra("video");
+                    String video = newVideo.getVidURL();
+                    videoView.getSettings().setJavaScriptEnabled(true);
+                    videoView.setWebChromeClient(new WebChromeClient(){
+
+                    });
+                    videoView.loadData(video,"text/html","utf-8");
+
                     TextView note = (TextView) findViewById(R.id.note);
                     MyEventDay newNote = editNote.getParcelableExtra("New Note");
                     note.setText(newNote.getNote());

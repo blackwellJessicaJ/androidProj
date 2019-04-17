@@ -12,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.TextView;
 import com.applandeo.materialcalendarview.*;
 import com.applandeo.materialcalendarview.CalendarView;
@@ -155,10 +157,19 @@ public class CalendarPage extends AppCompatActivity {
             //When accessed through Workouts Page selects current date and sends data to add note Activity
             Intent workout = getIntent();
 
-            if (workout.getStringExtra("ADD") != null ){
+            WebView videoView = findViewById(R.id.videoWebView);
+
+            if (workout.getStringExtra("ADD") != null )
+            {
                 Object event = workout.getParcelableExtra("event");
+
+                Object vidEvent = workout.getParcelableExtra("video");
+                MyEventDay myVideoDay= (MyEventDay) vidEvent;
+
                 MyEventDay myEventDay = (MyEventDay) event;
+
                 Intent addNote = new Intent(CalendarPage.this, AddNote.class);
+                addNote.putExtra("video", myVideoDay);
                 addNote.putExtra("event", myEventDay);
                 startActivityForResult(addNote, 1);
 

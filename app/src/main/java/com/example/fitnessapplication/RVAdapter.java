@@ -85,16 +85,21 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
            //Takes Information of Selected Workout, Creates EventDay, and sends to CalendarPage
             @Override
             public void onClick(View v) {
+
+
                 Intent intent = new Intent(v.getContext(), CalendarPage.class);
                 Bundle bundle = new Bundle();
 
                 Calendar day = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
                 MyEventDay myEventDay = new MyEventDay(day,
-                        R.drawable.ic_message_black_48dp, sdf.format(day.getTime()) + ": " + workouts.get(i).reps);
+                        R.drawable.ic_message_black_48dp, sdf.format(day.getTime()) + ": " + workouts.get(i).reps , workouts.get(i).videoUrl);
 
+               // myEventDay.setVidURL(workouts.get(i).videoUrl);
                 intent.putExtra("ADD", "ADD");
                 intent.putExtra("event", myEventDay);
+
+                intent.putExtra("video", myEventDay);
 
 
 

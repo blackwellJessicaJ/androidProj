@@ -35,9 +35,9 @@ public class AddNote extends AppCompatActivity {
             Object event = intent.getParcelableExtra("event");
             Object videoEvent = intent.getParcelableExtra("video");
 
-            if(videoEvent instanceof MyEventDay)
+            if(videoEvent instanceof Video)
             {
-                MyEventDay myVidDay = (MyEventDay) videoEvent;
+                Video myVidDay = (Video) videoEvent;
                 myVidDay.getVidURL();
                 videoView.getSettings().setJavaScriptEnabled(true);
                 videoView.setWebChromeClient(new WebChromeClient());
@@ -51,7 +51,6 @@ public class AddNote extends AppCompatActivity {
                 MyEventDay myEventDay = (MyEventDay)event;
                 getSupportActionBar().setTitle(getFormattedDate(myEventDay.getCalendar().getTime()));
 
-                note.setText(myEventDay.getVidURL());
 
                 note.setText(myEventDay.getNote());
 
@@ -71,15 +70,13 @@ public class AddNote extends AppCompatActivity {
                         String currentNote = workoutNotes.getString(sdf.format(day.getTime()), "") + "\n" + myEventDay.getNote();
                         //myEventDay.setNote(currentNote);
 
-                        String currentVid = workoutNotes.getString(sdf.format(day.getTime()),"") +"\n" + myEventDay.getVidURL();
 
                         editor.putString(sdf.format(day.getTime()),currentNote);
                         editor.commit();
-                        editor.putString(sdf.format(day.getTime()),currentVid);
-                        editor.commit();
+
 
                         //Returns edited Event to CalendarPage
-                        MyEventDay newMyEventDay = new MyEventDay(day, R.drawable.ic_message_black_48dp, currentNote, currentVid);
+                        MyEventDay newMyEventDay = new MyEventDay(day, R.drawable.ic_message_black_48dp, currentNote);
                         returnIntent.putExtra(CalendarPage.RESULT, newMyEventDay);
                         setResult(Activity.RESULT_OK, returnIntent);
                         finish();

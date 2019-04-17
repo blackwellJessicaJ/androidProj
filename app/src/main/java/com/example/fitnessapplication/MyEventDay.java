@@ -18,20 +18,15 @@ import java.util.Calendar;
 
 class MyEventDay extends EventDay implements Parcelable {
     private String mNote;
-    private String mVidURL;
 
 
-    MyEventDay(Calendar day, int imageResource, String note, String video) {
+
+
+    MyEventDay(Calendar day, int imageResource, String note) {
         super(day, imageResource);
         mNote = note;
-        mVidURL = video;
-
 
     }
-
-
-
-
 
     String getNote() {
         return mNote;
@@ -39,19 +34,11 @@ class MyEventDay extends EventDay implements Parcelable {
 
     void setNote(String newNote) {mNote= newNote;}
 
-    public String getVidURL() {
-        return mVidURL;
-    }
-
-    public void setVidURL(String vidURL) {
-        mVidURL = vidURL;
-    }
 
     private MyEventDay(Parcel in) {
         super((Calendar) in.readSerializable(), in.readInt());
 
         mNote = in.readString();
-        mVidURL = in.readString();
     }
 
     public static final Creator<MyEventDay> CREATOR = new Creator<MyEventDay>() {
@@ -71,8 +58,6 @@ class MyEventDay extends EventDay implements Parcelable {
         parcel.writeSerializable(getCalendar());
         parcel.writeInt(R.drawable.ic_message_black_48dp);
         parcel.writeString(mNote);
-        parcel.writeString(mVidURL);
-
     }
 
     @Override

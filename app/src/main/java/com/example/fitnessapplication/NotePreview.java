@@ -65,14 +65,7 @@ public class NotePreview extends AppCompatActivity {
             case 1:
                 if(resultCode == RESULT_OK){
 
-                    WebView videoView = findViewById(R.id.videoWebView);
-                    MyEventDay newVideo = editNote.getParcelableExtra("video");
-                    String video = newVideo.getVidURL();
-                    videoView.getSettings().setJavaScriptEnabled(true);
-                    videoView.setWebChromeClient(new WebChromeClient(){
 
-                    });
-                    videoView.loadData(video,"text/html","utf-8");
 
                     TextView note = (TextView) findViewById(R.id.note);
                     MyEventDay newNote = editNote.getParcelableExtra("New Note");

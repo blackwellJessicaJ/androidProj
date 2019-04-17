@@ -36,7 +36,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
         TextView workoutReps;
         Button workoutButton;
         //ex
-        WebView videoWeb;
+        //WebView videoWeb;
 
 
         WorkoutViewHolder(View itemView) {
@@ -45,11 +45,11 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
             workoutName = (TextView)itemView.findViewById(R.id.workout_name);
             workoutReps = (TextView)itemView.findViewById(R.id.workout_reps);
             workoutButton = itemView.findViewById(R.id.workout_button);
-            videoWeb= (WebView)itemView.findViewById(R.id.videoWebView);
-            videoWeb.getSettings().setJavaScriptEnabled(true);
-            videoWeb.setWebChromeClient(new WebChromeClient(){
+          //  videoWeb= (WebView)itemView.findViewById(R.id.videoWebView);
+//            videoWeb.getSettings().setJavaScriptEnabled(true);
+//            videoWeb.setWebChromeClient(new WebChromeClient(){
 
-            });
+        //});
 
         }
     }
@@ -77,7 +77,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
         workoutViewHolder.workoutName.setText(workouts.get(i).name);
         workoutViewHolder.workoutReps.setText(workouts.get(i).reps);
         //ex
-        workoutViewHolder.videoWeb.loadData(workouts.get(i).getVideoUrl(), "text/html","utf-8" );
+//        workoutViewHolder.videoWeb.loadData(workouts.get(i).getVideoUrl(), "text/html","utf-8" );
 
 
         workoutViewHolder.workoutButton.setOnClickListener(new View.OnClickListener() {
@@ -93,13 +93,14 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
                 Calendar day = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
                 MyEventDay myEventDay = new MyEventDay(day,
-                        R.drawable.ic_message_black_48dp, sdf.format(day.getTime()) + ": " + workouts.get(i).reps , workouts.get(i).videoUrl);
+                        R.drawable.ic_message_black_48dp, sdf.format(day.getTime()) + ": " + workouts.get(i).reps);
+                Video myVideo = new Video(workouts.get(i).videoUrl);
 
                // myEventDay.setVidURL(workouts.get(i).videoUrl);
                 intent.putExtra("ADD", "ADD");
                 intent.putExtra("event", myEventDay);
 
-                intent.putExtra("video", myEventDay);
+                intent.putExtra("video", myVideo);
 
 
 

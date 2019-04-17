@@ -164,7 +164,7 @@ public class CalendarPage extends AppCompatActivity {
                 Object event = workout.getParcelableExtra("event");
 
                 Object vidEvent = workout.getParcelableExtra("video");
-                MyEventDay myVideoDay= (MyEventDay) vidEvent;
+                Video myVideoDay= (Video) vidEvent;
 
                 MyEventDay myEventDay = (MyEventDay) event;
 

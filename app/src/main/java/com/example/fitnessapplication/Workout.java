@@ -6,6 +6,8 @@ import android.webkit.WebView;
 class Workout {
     String name;
     String reps;
+
+
     String videoUrl;
 
     Workout (String name, String reps, String video){
@@ -14,13 +16,14 @@ class Workout {
         this.videoUrl = video;
     }
 
-    public String getVideoUrl(){
+    public String getVideoUrl() {
         return videoUrl;
     }
 
-    public void setVideoUrl(String videoUrl){
+    public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
     }
+
 }
 
 

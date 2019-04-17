@@ -68,7 +68,6 @@ public class AddNote extends AppCompatActivity {
                         SharedPreferences.Editor editor = workoutNotes.edit();
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                         String currentNote = workoutNotes.getString(sdf.format(day.getTime()), "") + "\n" + myEventDay.getNote();
-                        //myEventDay.setNote(currentNote);
 
 
                         editor.putString(sdf.format(day.getTime()),currentNote);

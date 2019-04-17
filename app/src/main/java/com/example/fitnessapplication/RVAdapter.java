@@ -1,31 +1,18 @@
 package com.example.fitnessapplication;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.applandeo.materialcalendarview.CalendarView;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;//
-//merged with VideoAdapter to add videos to recyclerview
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>{
-    //ex
-   // List<YouTubeVideos> youtubeVideoList;
     public RVAdapter(){
 
     }
@@ -35,8 +22,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
         TextView workoutName;
         TextView workoutReps;
         Button workoutButton;
-        //ex
-        //WebView videoWeb;
 
 
         WorkoutViewHolder(View itemView) {
@@ -45,12 +30,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
             workoutName = (TextView)itemView.findViewById(R.id.workout_name);
             workoutReps = (TextView)itemView.findViewById(R.id.workout_reps);
             workoutButton = itemView.findViewById(R.id.workout_button);
-          //  videoWeb= (WebView)itemView.findViewById(R.id.videoWebView);
-//            videoWeb.getSettings().setJavaScriptEnabled(true);
-//            videoWeb.setWebChromeClient(new WebChromeClient(){
-
-        //});
-
         }
     }
 
@@ -76,10 +55,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
     public void onBindViewHolder (WorkoutViewHolder workoutViewHolder, int i) {
         workoutViewHolder.workoutName.setText(workouts.get(i).name);
         workoutViewHolder.workoutReps.setText(workouts.get(i).reps);
-        //ex
-//        workoutViewHolder.videoWeb.loadData(workouts.get(i).getVideoUrl(), "text/html","utf-8" );
-
-
         workoutViewHolder.workoutButton.setOnClickListener(new View.OnClickListener() {
 
            //Takes Information of Selected Workout, Creates EventDay, and sends to CalendarPage
@@ -88,7 +63,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
 
 
                 Intent intent = new Intent(v.getContext(), CalendarPage.class);
-                Bundle bundle = new Bundle();
 
                 Calendar day = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
@@ -96,14 +70,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.WorkoutViewHolder>
                         R.drawable.ic_message_black_48dp, sdf.format(day.getTime()) + ": " + workouts.get(i).reps);
                 Video myVideo = new Video(workouts.get(i).videoUrl);
 
-               // myEventDay.setVidURL(workouts.get(i).videoUrl);
+
                 intent.putExtra("ADD", "ADD");
                 intent.putExtra("event", myEventDay);
-
                 intent.putExtra("video", myVideo);
-
-
-
 
                 v.getContext().startActivity(intent);
             }

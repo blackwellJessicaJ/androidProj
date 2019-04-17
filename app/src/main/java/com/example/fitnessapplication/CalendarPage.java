@@ -32,18 +32,8 @@ import java.util.List;
 
 public class CalendarPage extends AppCompatActivity {
 
-
-
-    Calendar day = Calendar.getInstance();
-
-
     private CalendarView mCalendarView;
 
-
-
-
-
-    //private List<EventDay> mEventDays = new ArrayList<>();
     public static final String EVENT ="event";
     public static final String RESULT = "result";
     private static final int ADD_NOTE = 44;
@@ -90,29 +80,17 @@ public class CalendarPage extends AppCompatActivity {
         };
 
 
-
-
-
         @Override
         protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
 
-
-
             setContentView(R.layout.activity_calendar);
-
 
             BottomNavigationView bottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
             bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
             bottomNavigation.getMenu().getItem(2).setChecked(true);
 
-
-
-
-
             mCalendarView =  (CalendarView) findViewById(R.id.calendarView);
-
-
 
             //Gets Workout EventDays from SharedPreferences and applies them to the Calendar View
             SharedPreferences dates = getSharedPreferences("CompletedWorkouts", Context.MODE_PRIVATE);
@@ -153,11 +131,8 @@ public class CalendarPage extends AppCompatActivity {
                 }
             });
 
-
             //When accessed through Workouts Page selects current date and sends data to add note Activity
             Intent workout = getIntent();
-
-            WebView videoView = findViewById(R.id.videoWebView);
 
             if (workout.getStringExtra("ADD") != null )
             {
@@ -174,8 +149,6 @@ public class CalendarPage extends AppCompatActivity {
                 startActivityForResult(addNote, 1);
 
             }
-
-
         }
 
     //Returns from AddNote Activity
@@ -228,17 +201,11 @@ public class CalendarPage extends AppCompatActivity {
             String newJson = new Gson().toJson(eventsNote);
             editor.putString(workoutReps, newJson);
             editor.commit();
-
-
-
-
-
         }
         //Refreshes Calendar
         Intent refresh = new Intent(CalendarPage.this, CalendarPage.class);
         startActivity(refresh);
         this.finish();
-
     }
 
     //Starts PreviewNote Activity for selected date
@@ -249,9 +216,5 @@ public class CalendarPage extends AppCompatActivity {
         }
         startActivity(intent);
     }
-
-
-
-
 }
 

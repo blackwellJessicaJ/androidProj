@@ -54,7 +54,6 @@ public class NotePreview extends AppCompatActivity {
                 startActivityForResult(editNote, 1 );
             }
         });
-
     }
 
     @Override
@@ -64,17 +63,11 @@ public class NotePreview extends AppCompatActivity {
         switch (requestCode){
             case 1:
                 if(resultCode == RESULT_OK){
-
-
-
                     TextView note = (TextView) findViewById(R.id.note);
                     MyEventDay newNote = editNote.getParcelableExtra("New Note");
                     note.setText(newNote.getNote());
-
                 }
-
             }
-
     }
 
     public static String getFormattedDate(Date date) {

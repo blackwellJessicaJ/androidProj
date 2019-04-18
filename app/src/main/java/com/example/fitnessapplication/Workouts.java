@@ -79,8 +79,8 @@ public class Workouts extends AppCompatActivity {
         workouts.add(new Workout ("Push-Ups", "10 Push-Ups", "<iframe width=\"100%\" height=\"100%\" " +
                 "src=\"https://www.youtube.com/embed/YdB1HMCldJY\" frameborder=\"0\" " +
                 "allowfullscreen></iframe>"));
-        workouts.add(new Workout ("Push-Ups", "20 Push-Ups", "<iframe width=\"100%\" height=\"100%\" " +
-                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+        workouts.add(new Workout ("20 Minute Full Body", "30/10 Cardio", "<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://www.youtube.com/embed/UBMk30rjy0o\" frameborder=\"0\" " +
                 "allowfullscreen></iframe>"));
         workouts.add(new Workout ("Sit-Ups", "10 Sit-Ups", "<iframe width=\"100%\" height=\"100%\" " +
                 "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
@@ -97,8 +97,8 @@ public class Workouts extends AppCompatActivity {
         workouts.add(new Workout ("Squats", "10 Squats" ,"<iframe width=\"100%\" height=\"100%\" " +
                 "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
                 "allowfullscreen></iframe>"));
-        workouts.add(new Workout ("Squats", "20 Squats" ,"<iframe width=\"100%\" height=\"100%\" " +
-                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+        workouts.add(new Workout ("30 Minute Cardio", "Cardio Boxing" ,"<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://www.youtube.com/embed/HW7lqDLwG_Y\" frameborder=\"0\" " +
                 "allowfullscreen></iframe>"));
     }
 

@@ -85,14 +85,14 @@ public class Workouts extends AppCompatActivity {
         workouts.add(new Workout ("Sit-Ups", "10 Sit-Ups", "<iframe width=\"100%\" height=\"100%\" " +
                 "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
                 "allowfullscreen></iframe>"));
-        workouts.add(new Workout ("Sit-Ups", "20 Sit-Ups","<iframe width=\"100%\" height=\"100%\" " +
-                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+        workouts.add(new Workout ("Flexibility and Mobility", "20 Minute stretch","<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://www.youtube.com/embed/nFo5dOhlYUw\" frameborder=\"0\" " +
                 "allowfullscreen></iframe>"));
-        workouts.add(new Workout ("Pull-Ups", "10 Pull-Ups","<iframe width=\"100%\" height=\"100%\" " +
-                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+        workouts.add(new Workout ("Core", "20/10 Abs","<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://https://www.youtube.com/embed/dJlFmxiL11s\" frameborder=\"0\" " +
                 "allowfullscreen></iframe>"));
-        workouts.add(new Workout ("Pull-Ups", "20 Pull-Ups","<iframe width=\"100%\" height=\"100%\" " +
-                "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
+        workouts.add(new Workout ("30 Minute Lower Body", "30 Minute glutes","<iframe width=\"100%\" height=\"100%\" " +
+                "src=\"https://https://www.youtube.com/embed/_ZqtZSuh5Rk\" frameborder=\"0\" " +
                 "allowfullscreen></iframe>"));
         workouts.add(new Workout ("Squats", "10 Squats" ,"<iframe width=\"100%\" height=\"100%\" " +
                 "src=\"https://www.youtube.com/embed/50kH47ZztHs\" frameborder=\"0\" " +
